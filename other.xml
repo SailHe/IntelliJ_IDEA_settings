@@ -1,0 +1,27 @@
+<application>
+  <component name="CvsApplicationLevelConfiguration">
+    <option name="PATH_TO_PASSWORD_FILE" value="$userdir/.cvspass" />
+  </component>
+  <component name="NodeJsLocalInterpreters">
+    <local-interpreter path="E:/nodejs/node_etw_provider.man">
+      <version-cache last-modified="1518282512000" />
+    </local-interpreter>
+    <local-interpreter path="E:/nodejs/node.exe">
+      <version-cache version="8.11.1" last-modified="1522335974000" />
+    </local-interpreter>
+  </component>
+  <component name="PersistenceGenerationSettings">
+    <option name="addToUnit" value="true" />
+    <option name="entitySuffix" value="" />
+    <option name="generateColumnProperties" value="true" />
+    <option name="ENTITY_SUFFIX" value="" />
+    <option name="GENERATE_COLUMN_PROPERTIES" value="true" />
+    <option name="ADD_TO_UNIT" value="true" />
+  </component>
+  <component name="RefactoringSettings">
+    <option name="RENAME_SEARCH_IN_COMMENTS_FOR_PACKAGE" value="false" />
+    <option name="RENAME_SEARCH_FOR_TEXT_FOR_PACKAGE" value="false" />
+    <option name="MOVE_PREVIEW_USAGES" value="false" />
+    <option name="INTRODUCE_LOCAL_CREATE_FINALS" value="false" />
+  </component>
+</application>

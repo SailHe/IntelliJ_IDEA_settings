@@ -1,0 +1,10 @@
+<templateSet group="html/xml">
+  <template name="&lt;" value="&lt;!--$tips$--&gt;" description="html注释" toReformat="false" toShortenFQNames="true">
+    <variable name="tips" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="CSS" value="true" />
+      <option name="HTML" value="true" />
+      <option name="JSON" value="true" />
+    </context>
+  </template>
+</templateSet>

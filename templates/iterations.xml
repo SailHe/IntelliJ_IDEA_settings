@@ -1,0 +1,24 @@
+<templateSet group="iterations">
+  <template name="for s" value="for (int i = 0; i &lt; $N$; i++){&#10;    System.out.print(i != 0 ? &quot; &quot; : &quot;&quot;);&#10;    System.out.print(&quot;$Output$&quot;);&#10;}&#10;$END$" description="Print:value and blank base on loop" toReformat="false" toShortenFQNames="true">
+    <variable name="N" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="Output" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="wnext" value="while(in$a$.hasNext()){&#10;    $END$&#10;}" description="输入终止迭代" toReformat="false" toShortenFQNames="true">
+    <variable name="a" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="wgroup" value="int group = in.nextInt();&#10;while(group-- &gt; 0){&#10;    $END$&#10;}" description="输入组数终止迭代" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>
