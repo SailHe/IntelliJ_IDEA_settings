@@ -162,8 +162,12 @@
           <option name="url" value="git@github.com:tengj/SpringBootDemo.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="git@github.com:gejiawen/bullhead.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="E:\Projects\JAVA" />
+    <option name="cloneParentDir" value="E:\Projects\Sctipt" />
   </component>
 </application>
