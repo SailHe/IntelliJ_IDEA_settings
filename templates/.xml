@@ -61,4 +61,18 @@
       <option name="Vue" value="true" />
     </context>
   </template>
+  <template name="jpaTemplate" value="Pageable pageable = new PageRequest(pageNum, pageLength, new Sort(Sort.Direction.DESC, &quot;$sortAttribute$&quot;));&#10;List&lt;$primaryKeyType$&gt; $name$IdList = new LinkedList&lt;$primaryKeyType$&gt;();&#10;Specification&lt;$BeanType$&gt; specification = (root, criteriaQuery, criteriaBuilder) -&gt; {&#10;    //过滤条件&#10;    Predicate filter = criteriaBuilder.and(&#10;            root.get(&quot;$name$Id&quot;).in($name$IdList)&#10;            , criteriaBuilder.notEqual(root.get(&quot;$name$&quot;), &quot;idValue&quot;)&#10;    );&#10;    return filter;&#10;};&#10;Page&lt;$BeanType$&gt; page = orderRepository.findAll(specification, pageable);" description="使用jpa的分页, 查询模板" toReformat="false" toShortenFQNames="true">
+    <variable name="sortAttribute" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="primaryKeyType" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="BeanType" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="parameterPage" value="Integer pageNum, Integer pageLength" description="分页参数模板" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
 </templateSet>
