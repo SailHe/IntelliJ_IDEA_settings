@@ -6,7 +6,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="methodSignature" value="/**&#10; * Descriptions: $descriptions$&lt;p&gt;&#10; * &#10; * @param $Param$&#10; * @return $Return$&#10; * @author 何帆&#10; * @date $Date$ $Time$&#10; */" description="方法签名(内部)" toReformat="false" toShortenFQNames="true">
+  <template name="methodSignature" value="/**&#10; * Descriptions: $descriptions$&lt;p&gt;&#10; * &#10; * @param $Param$&#10; * @return $Return$&#10; * @author SailHe&#10; * @date $Date$ $Time$&#10; */" description="方法签名(内部)" toReformat="false" toShortenFQNames="true">
     <variable name="descriptions" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="Date" expression="date()" defaultValue="" alwaysStopAt="false" />
     <variable name="Time" expression="time()" defaultValue="" alwaysStopAt="false" />
