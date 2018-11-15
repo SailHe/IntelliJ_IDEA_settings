@@ -75,4 +75,13 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
+  <template name="uniform_u_h" value="/**&#10; * Descriptions: $descriptions$&lt;p&gt;&#10; * &#10; * @author Unknown||Hidden&#10; * @date $Date$ $Time$&#10; */" description="通用注释作者隐藏或未知版" toReformat="false" toShortenFQNames="true">
+    <variable name="descriptions" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="Date" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="Time" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
