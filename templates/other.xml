@@ -1,5 +1,5 @@
 <templateSet group="other">
-  <template name="const" value="static final" description="编译时期常量声明" toReformat="false" toShortenFQNames="true">
+  <template name="constant" value="static final" description="编译时期常量声明修饰" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
     </context>
