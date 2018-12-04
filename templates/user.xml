@@ -1,0 +1,8 @@
+<templateSet group="user">
+  <template name="ajaxTemplate" value="$.ajax({&#10;    type: 'post',&#10;    dataType: 'json',&#10;    data: $dataTableForm.serialize() + editPrimaryKey,&#10;    url: (editPrimaryKey == &quot;&quot;) ? &quot;../subject/save&quot; : &quot;../subject/update&quot;,&#10;    success: tipsCallbackClosure($DataTableAPI, $name$, $addAndEditModal),&#10;});" description="创建jQuery的ajax模板" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+</templateSet>
