@@ -210,6 +210,10 @@
           <option name="url" value="https://github.com/SailHe/lost_and_found.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="git@github.com:chitranshkhare/spring-yml-reader.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="E:\Projects\Demo" />
