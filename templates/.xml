@@ -96,4 +96,12 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="toDto" value="$DtoType$ dto = new $DtoType$();&#10;// 拷贝当前入参中所有与DTO匹配的字段&#10;org.springframework.beans.BeanUtils.copyProperties($inputOrDto$, dto);" description="input / bean -&gt; dto" toReformat="false" toShortenFQNames="true">
+    <variable name="DtoType" expression="" defaultValue="Target" alwaysStopAt="true" />
+    <variable name="inputOrDto" expression="" defaultValue="Origin" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
