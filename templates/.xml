@@ -90,4 +90,12 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="Save" value="$EntityType$ currentEntity = $currentRepo$.FirstOrDefault(input.id);&#10;if (currentEntity == null)&#10;{&#10;    // 书写创建时生成的字段&#10;    currentEntity = new $EntityType$();&#10;    currentEntity.create_id = _userData.user_id;&#10;    currentEntity.create_date = DateTime.Now;&#10;    currentEntity.org_id = _userData.org_id;&#10;}&#10;else&#10;{&#10;    // DNT&#10;}&#10;currentEntity.last_update_date = DateTime.Now;&#10;currentEntity.last_update_id = _userData.user_id;&#10;// 书写允许更新的字段&#10;currentEntity.field = input.field;&#10;$EntityType$ savedEntity = $currentRepo$.Update(currentEntity);&#10;return savedEntity.getId();" description="保存逻辑(新增+更新)" toReformat="false" toShortenFQNames="true">
+    <variable name="EntityType" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="currentRepo" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
