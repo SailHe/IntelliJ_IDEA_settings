@@ -104,4 +104,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="OPTIONS" value="@RequestMapping(method = RequestMethod.OPTIONS)" description="OPTIONS注解(一般不会用上)" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
