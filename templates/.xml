@@ -122,4 +122,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="PutStatus" value="@PutMapping(value = &quot;xxxx&quot;)&#10;@ApiOperation(value = &quot;xxxx[状态切换(审核/弃审/停用)]-OK&quot;)&#10;@ApiResponses({@ApiResponse(code = 200, message = &quot;OK&quot;, response = String.class)})&#10;@ApiImplicitParams({&#10;        @ApiImplicitParam(name = &quot;ids&quot;, value = &quot;xxxx主键(多个逗号分割)&quot;, required = true),&#10;        @ApiImplicitParam(name = &quot;target_status&quot;, value = &quot;目标状态: 0未审核(制单) 1已审核 99停用&quot;, required = true)&#10;})&#10;public JsonData switchXxxxStatus(@Validated @RequestParam(&quot;ids&quot;) Long[] ids,&#10;        @Validated @RequestParam(&quot;target_status&quot;) Long targetStatus) {&#10;    service.switchSpecStatus(ids, targetStatus);&#10;    return success();&#10;}" description="状态转换" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
