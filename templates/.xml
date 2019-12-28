@@ -91,7 +91,7 @@
     </context>
   </template>
   <template name="Save" value="boolean isInsert = false;&#10;LoginUser loginUser = SecurityUtils.getLoginUser();&#10;$EntityType$ currentEntity = input.getId() == null ? null : repository.selectById(input.getId());&#10;// 若不存在也被视为新建&#10;if (currentEntity == null) {&#10;    isInsert = true;&#10;    // 书写创建时生成的字段&#10;    currentEntity = new $EntityType$();&#10;    currentEntity.setCreateId(loginUser.getUser().getId());&#10;    currentEntity.setCreateDate(new Date(System.currentTimeMillis()));&#10;    //currentEntity.setOrgId(loginUser.getUser().getOrgId()); // MybatisPlusConfig 中有配置&#10;} else {&#10;    // DNT&#10;}&#10;currentEntity.setLastUpdateDate(new Date(System.currentTimeMillis()));&#10;currentEntity.setLastUpdateId(loginUser.getUser().getId());&#10;// 书写允许更新的字段&#10;currentEntity.setField(input.getField());&#10;//  Cause: java.sql.SQLException: 无效的列类型: 1111 当使用updateById插入时&#10;int cnt = isInsert ? repository.insert(currentEntity) : repository.updateById(currentEntity);&#10;if (cnt != 1) {&#10;    throw new FriendlyException(&quot;保存失败&quot;);&#10;}&#10;// 已更新&#10;return currentEntity.getId();" description="保存逻辑(新增+更新)" toReformat="false" toShortenFQNames="true">
-    <variable name="EntityType" expression="collectionElementName()" defaultValue="&quot;EntityType&quot;" alwaysStopAt="true" />
+    <variable name="EntityType" expression="rightSideType()" defaultValue="&quot;EntityType&quot;" alwaysStopAt="true" />
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
@@ -123,13 +123,23 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="PutStatus" value="@PutMapping(value = &quot;xxxx&quot;)&#10;@ApiOperation(value = &quot;xxxx[状态切换(审核/弃审/停用)]-OK&quot;)&#10;@ApiResponses({@ApiResponse(code = 200, message = &quot;OK&quot;, response = String.class)})&#10;@ApiImplicitParams({&#10;        @ApiImplicitParam(name = &quot;ids&quot;, value = &quot;xxxx主键(多个逗号分割)&quot;, required = true),&#10;        @ApiImplicitParam(name = &quot;target_status&quot;, value = &quot;目标状态: 0未审核(制单) 1已审核 99停用&quot;, required = true)&#10;})&#10;public JsonData switchXxxxStatus(@Validated @RequestParam(&quot;ids&quot;) Long[] ids,&#10;        @Validated @RequestParam(&quot;target_status&quot;) Long targetStatus) {&#10;    service.switchSpecStatus(ids, targetStatus);&#10;    return success();&#10;}" description="状态转换" toReformat="false" toShortenFQNames="true">
+  <template name="PutStatus" value="@PutMapping(value = &quot;$api$&quot;)&#10;@ApiOperation(value = &quot;$apiName$[状态切换(审核/弃审/停用)]-OK&quot;)&#10;@ApiResponses({@ApiResponse(code = 200, message = &quot;OK&quot;, response = String.class)})&#10;@ApiImplicitParams({&#10;        @ApiImplicitParam(name = &quot;ids&quot;, value = &quot;$apiName$主键(多个逗号分割)&quot;, required = true),&#10;        @ApiImplicitParam(name = &quot;target_status&quot;, value = &quot;目标状态: 0未审核(制单) 1已审核 99停用&quot;, required = true)&#10;})&#10;public JsonData switch$Api$Status(@Validated @RequestParam(&quot;ids&quot;) Long[] ids,&#10;        @Validated @RequestParam(&quot;target_status&quot;) Long targetStatus) {&#10;    service.switch$Api$Status(ids, targetStatus);&#10;    return success();&#10;}" description="状态转换" toReformat="false" toShortenFQNames="true">
+    <variable name="api" expression="" defaultValue="&quot;entity&quot;" alwaysStopAt="true" />
+    <variable name="apiName" expression="" defaultValue="&quot;操作对象&quot;" alwaysStopAt="true" />
+    <variable name="Api" expression="" defaultValue="&quot;Entity&quot;" alwaysStopAt="true" />
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
   <template name="API_S" value="@ApiImplicitParams({&#10;        @ApiImplicitParam(name = &quot;ids&quot;, value = &quot;供应商id集合,逗号分隔&quot;, required = true),&#10;        @ApiImplicitParam(name = &quot;target_status&quot;, value = &quot;目标状态&quot;, required = true)&#10;})" description="参数中多个API注解" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="Test" value="$A$ a = new Integer(1);" description="测试用" toReformat="false" toShortenFQNames="true">
+    <variable name="A" expression="commentEnd()" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
