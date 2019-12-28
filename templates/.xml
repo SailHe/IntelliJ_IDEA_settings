@@ -50,7 +50,7 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
-  <template name="lambda" value="($par$) =&gt; {&#10;    $desc$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+  <template name="lambda" value="($par$) =&gt; {&#10;    $desc$&#10;}" description="Js匿名函数" toReformat="false" toShortenFQNames="true">
     <variable name="par" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="desc" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -62,10 +62,10 @@
     </context>
   </template>
   <template name="jpaTemplate" value="Pageable pageable = new PageRequest(pageNum, pageLength, new Sort(Sort.Direction.DESC, &quot;$sortAttribute$&quot;));&#10;List&lt;$primaryKeyType$&gt; $name$IdList = new LinkedList&lt;$primaryKeyType$&gt;();&#10;Specification&lt;$BeanType$&gt; specification = (root, criteriaQuery, criteriaBuilder) -&gt; {&#10;    //过滤条件&#10;    Predicate filter = criteriaBuilder.and(&#10;            root.get(&quot;$name$Id&quot;).in($name$IdList)&#10;            , criteriaBuilder.notEqual(root.get(&quot;$name$&quot;), &quot;idValue&quot;)&#10;    );&#10;    return filter;&#10;};&#10;Page&lt;$BeanType$&gt; page = orderRepository.findAll(specification, pageable);" description="使用jpa的分页, 查询模板" toReformat="false" toShortenFQNames="true">
-    <variable name="sortAttribute" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="primaryKeyType" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="BeanType" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="sortAttribute" expression="" defaultValue="&quot;sorter&quot;" alwaysStopAt="false" />
+    <variable name="primaryKeyType" expression="" defaultValue="&quot;PkType&quot;" alwaysStopAt="false" />
+    <variable name="name" expression="" defaultValue="&quot;name&quot;" alwaysStopAt="false" />
+    <variable name="BeanType" expression="" defaultValue="&quot;BeanType&quot;" alwaysStopAt="false" />
     <context>
       <option name="JAVA_CODE" value="true" />
     </context>
