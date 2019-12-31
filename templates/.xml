@@ -138,8 +138,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="Test" value="$A$ a = new Integer(1);" description="测试用" toReformat="false" toShortenFQNames="true">
-    <variable name="A" expression="commentEnd()" defaultValue="" alwaysStopAt="true" />
+  <template name="EPS" value="($sumAmountOfGoods$.subtract(new BigDecimal(0)).compareTo($ProjectConstants$.$PRICE_EPS$) &lt; 0)" description="精度判定" toReformat="false" toShortenFQNames="true">
+    <variable name="sumAmountOfGoods" expression="" defaultValue="&quot;amount&quot;" alwaysStopAt="false" />
+    <variable name="ProjectConstants" expression="" defaultValue="&quot;Constants&quot;" alwaysStopAt="false" />
+    <variable name="PRICE_EPS" expression="" defaultValue="&quot;EPS&quot;" alwaysStopAt="false" />
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
