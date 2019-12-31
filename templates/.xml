@@ -147,4 +147,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="WRAPPER" value="if (!StringUtils.isEmpty(input.getCategoryCode())) {&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    if (!StringUtils.isEmpty(input.getCategoryCode())) {&#10;        //wrapper.or();&#10;        wrapper.eq(&quot;dept_code&quot;, input.getCategoryCode());&#10;    }&#10;    if (repository.selectCount(wrapper) != 0) {&#10;        throw new FriendlyException(&quot;物资分类编码重复&quot;);&#10;    }&#10;}&#10;// `SK: mybatis &quot;QueryWrapper&quot; 用法`&#10;// https://mp.baomidou.com/guide/wrapper.html#or&#10;// https://woodwhales.cn/2019/03/28/025/&#10;// `SK: BigDecimal.ROUND_HALF_UP`&#10;// http://longlonggo.com/post/387.html&#10;// https://isuperqiang.cn/post/java-bi-jiao-fu-dian-shu-de-zheng-que-fang-shi/&#10;// `SK: java BigDecimal 保留小数 -四舍五入 site:github.io`&#10;// http://www.fengbt.com/2019/05/24/Java8/BigDecimal%E4%BF%9D%E7%95%99%E4%B8%A4%E4%BD%8D%E5%B0%8F%E6%95%B0/&#10;// http://justyan.com/2016/02/19/java%E4%B8%AD%E4%BF%9D%E7%95%99%E4%B8%A4%E4%BD%8D%E5%B0%8F%E6%95%B0/&#10;" description="MyBatis-Plus 条件构造器" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
