@@ -138,7 +138,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="EPS" value="($sumAmountOfGoods$.subtract(new BigDecimal(0)).compareTo($ProjectConstants$.$PRICE_EPS$) &lt; 0)" description="精度判定" toReformat="false" toShortenFQNames="true">
+  <template name="EPS" value="// 精度问题: 是指当两个浮点的差异在EPS以内时, 就视为相等&#10;// 也就是说这里判断的是相等 而不是 &gt;=&#10;// ($sumAmountOfGoods$.subtract(new BigDecimal(0)).compareTo($ProjectConstants$.$PRICE_EPS$) &lt; 0)&#10;&#10;// 最小金额问题(最小能保存的金额是0.01)&#10;if (input.getCostPrice()&#10;        // 四舍五入 保留BIT_CNT(2)位小数&#10;        // 或者说 使用精度0.01判断相等 然后判断大于(这里只需保证0.02&gt;0.01009通过就行) 也是可行的&#10;        // 直接与0.01进行比较 实际上0.01可能是0.01000000....99999或0.00999999&#10;        // 否则保存0.01时 结果可能是不确定的&#10;        .setScale(Constants.BIT_CNT, BigDecimal.ROUND_HALF_UP)&#10;        // 与常量=new BigDecimal(0.01)进行比较&#10;        .compareTo(Constants.MTL_MIN_PRICE) &lt; 0) {&#10;    throw new FriendlyException(&quot;金额设置过小&quot;);&#10;}" description="精度判定" toReformat="false" toShortenFQNames="true">
     <variable name="sumAmountOfGoods" expression="" defaultValue="&quot;amount&quot;" alwaysStopAt="false" />
     <variable name="ProjectConstants" expression="" defaultValue="&quot;Constants&quot;" alwaysStopAt="false" />
     <variable name="PRICE_EPS" expression="" defaultValue="&quot;EPS&quot;" alwaysStopAt="false" />
