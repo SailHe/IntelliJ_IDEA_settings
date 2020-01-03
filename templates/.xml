@@ -153,4 +153,11 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="DIC" value="Map&lt;String, DictionaryDto&gt; dic = sysDictionaryManager&#10;        .dicList(&quot;$RuleType$&quot;, 0L, &quot;&quot;)&#10;        .stream()&#10;        .collect(Collectors.toMap(ele -&gt; ele.getDicCode(), ele -&gt; ele));" description="字典" toReformat="false" toShortenFQNames="true">
+    <variable name="RuleType" expression="" defaultValue="&quot;RULR_TYPE.XXX.getCode()&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
