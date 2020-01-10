@@ -160,7 +160,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="saveObey" value="if(input.get$ObeyCode$List() != null){&#10;    // 删除$ObeyName$&#10;    QueryWrapper wrapper = new QueryWrapper&lt;&gt;();&#10;    wrapper.eq(&quot;$MainCode$_id&quot;, savedId);&#10;    List&lt;$ObeyCode$&gt; current$ObeyCode$EntityList = mtlItem$ObeyCode$Repository.selectList(wrapper);&#10;    // 去重&#10;    Set&lt;Long&gt; del$ObeyCode$IdSet = current$ObeyCode$EntityList.stream().map(ele -&gt; ele.getId()).collect(Collectors.toSet());&#10;    Set&lt;Long&gt; input$ObeyCode$IdSet =input.get$ObeyCode$List().stream().map(ele -&gt; ele.getId()).collect(Collectors.toSet());&#10;    // 移除所有存在于传入$ObeyName$的ID列表中的ID&#10;    del$ObeyCode$IdSet.removeAll(input$ObeyCode$IdSet);&#10;    $ObeyCode$Manager.batchErase(del$ObeyCode$IdSet);&#10;&#10;    // 保存$ObeyName$&#10;    input.get$ObeyCode$List().forEach(ele -&gt; {&#10;        ele.set$MainCode$Id(savedId);&#10;        $ObeyCode$Manager.save(ele);&#10;    });&#10;}" description="从表保存逻辑(新增+更新+删除)" toReformat="false" toShortenFQNames="true">
+  <template name="obeySave" value="if(input.get$ObeyCode$List() != null){&#10;    // 删除$ObeyName$&#10;    QueryWrapper wrapper = new QueryWrapper&lt;&gt;();&#10;    wrapper.eq(&quot;$MainCode$_id&quot;, savedId);&#10;    List&lt;$ObeyCode$&gt; current$ObeyCode$EntityList = mtlItem$ObeyCode$Repository.selectList(wrapper);&#10;    // 去重&#10;    Set&lt;Long&gt; del$ObeyCode$IdSet = current$ObeyCode$EntityList.stream().map(ele -&gt; ele.getId()).collect(Collectors.toSet());&#10;    Set&lt;Long&gt; input$ObeyCode$IdSet =input.get$ObeyCode$List().stream().map(ele -&gt; ele.getId()).collect(Collectors.toSet());&#10;    // 移除所有存在于传入$ObeyName$的ID列表中的ID&#10;    del$ObeyCode$IdSet.removeAll(input$ObeyCode$IdSet);&#10;    $ObeyCode$Manager.batchErase(del$ObeyCode$IdSet);&#10;&#10;    // 保存$ObeyName$&#10;    input.get$ObeyCode$List().forEach(ele -&gt; {&#10;        ele.set$MainCode$Id(savedId);&#10;        $ObeyCode$Manager.save(ele);&#10;    });&#10;}" description="从表保存逻辑(新增+更新+删除)" toReformat="false" toShortenFQNames="true">
     <variable name="ObeyCode" expression="" defaultValue="&quot;Obey&quot;" alwaysStopAt="true" />
     <variable name="MainCode" expression="" defaultValue="&quot;Main&quot;" alwaysStopAt="true" />
     <variable name="ObeyName" expression="" defaultValue="&quot;从表&quot;" alwaysStopAt="true" />
@@ -170,6 +170,13 @@
     </context>
   </template>
   <template name="batchErase" value="public void batchErase(Collection&lt;Long&gt; idCollect) {&#10;    if (idCollect.size() &lt;= 0) {&#10;        return;&#10;    }&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.in(&quot;id&quot;, idCollect);&#10;    repository.delete(wrapper);&#10;}" description="批量删除" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="obeyErase" value="public void obeyErase(Long mainId) {&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.eq($MAIN_ID$, mainId);&#10;    repository.delete(wrapper);&#10;}" description="从表删除逻辑" toReformat="false" toShortenFQNames="true">
+    <variable name="MAIN_ID" expression="" defaultValue="&quot;MAIN_ID&quot;" alwaysStopAt="true" />
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
