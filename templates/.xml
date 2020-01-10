@@ -169,7 +169,9 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="batchErase" value="public void batchErase(Collection&lt;Long&gt; idCollect) {&#10;    if (idCollect.size() &lt;= 0) {&#10;        return;&#10;    }&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.in(&quot;id&quot;, idCollect);&#10;    repository.delete(wrapper);&#10;}" description="批量删除" toReformat="false" toShortenFQNames="true">
+  <template name="batchOp" value="public void batch$OpName$(Collection&lt;Long&gt; idCollect) {&#10;    if (idCollect.isEmpty()) {&#10;        return;&#10;    }&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.in(&quot;id&quot;, idCollect);&#10;    repository.$SigleOp$(wrapper);&#10;}" description="批量操作（通常是删除）" toReformat="false" toShortenFQNames="true">
+    <variable name="OpName" expression="" defaultValue="&quot;Erase&quot;" alwaysStopAt="true" />
+    <variable name="SigleOp" expression="" defaultValue="&quot;delete&quot;" alwaysStopAt="true" />
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
@@ -177,6 +179,27 @@
   </template>
   <template name="obeyErase" value="public void obeyErase(Long mainId) {&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.eq($MAIN_ID$, mainId);&#10;    repository.delete(wrapper);&#10;}" description="从表删除逻辑" toReformat="false" toShortenFQNames="true">
     <variable name="MAIN_ID" expression="" defaultValue="&quot;MAIN_ID&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="obeyErase_batch" value="public void obeyErase(Collection&lt;Long&gt; mainIdCollect) {&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.in(&quot;$MAIN_ID$&quot;, mainIdCollect);&#10;    repository.delete(wrapper);&#10;}" description="从表删除逻辑(批量版)" toReformat="false" toShortenFQNames="true">
+    <variable name="MAIN_ID" expression="" defaultValue="&quot;MAIN_ID&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="path" value="@DeleteMapping(value = &quot;/{ids}&quot;)&#10;@ApiOperation(value = &quot;批量物资档案删除-OK&quot;)&#10;@ApiImplicitParam(name = &quot;ids&quot;, value = &quot;物资档案id集合,逗号分隔&quot;, required = true)&#10;public JsonData delete(@PathVariable Long[] ids) {&#10;    service.batchErase(ids);&#10;    return success();&#10;}" description="批量操作（通常是删除） Path 版 通过/ids=xxx调用" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="listToArr" value="(List&lt;$ElementType$&gt; originList) -&gt; {&#10;    Long[] arr = new Long[originList.size()];&#10;    originList.toArray(arr);&#10;    return arr;&#10;}($originList$)" description="列表转数组" toReformat="false" toShortenFQNames="true">
+    <variable name="ElementType" expression="" defaultValue="Long" alwaysStopAt="true" />
+    <variable name="originList" expression="" defaultValue="OriginList" alwaysStopAt="true" />
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
