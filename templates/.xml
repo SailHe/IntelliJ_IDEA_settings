@@ -90,7 +90,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="Save" value="boolean isInsert = false;&#10;LoginUser loginUser = SecurityUtils.getLoginUser();&#10;$EntityType$ currentEntity = input.getId() == null ? null : repository.selectById(input.getId());&#10;// 若不存在也被视为新建&#10;if (currentEntity == null) {&#10;    isInsert = true;&#10;    // 书写创建时生成的字段&#10;    currentEntity = new $EntityType$();&#10;    currentEntity.setCreateId(loginUser.getUser().getId());&#10;    currentEntity.setCreateDate(new Date(System.currentTimeMillis()));&#10;    //currentEntity.setOrgId(loginUser.getUser().getOrgId()); // MybatisPlusConfig 中有配置&#10;} else {&#10;    // DNT&#10;}&#10;currentEntity.setLastUpdateDate(new Date(System.currentTimeMillis()));&#10;currentEntity.setLastUpdateId(loginUser.getUser().getId());&#10;// 书写允许更新的字段&#10;currentEntity.setField(input.getField());&#10;//  Cause: java.sql.SQLException: 无效的列类型: 1111 当使用updateById插入时&#10;int cnt = isInsert ? repository.insert(currentEntity) : repository.updateById(currentEntity);&#10;if (cnt != 1) {&#10;    throw new FriendlyException(&quot;保存失败&quot;);&#10;}&#10;// 已更新&#10;return currentEntity.getId();" description="保存逻辑(新增+更新)" toReformat="false" toShortenFQNames="true">
+  <template name="Save" value="boolean isInsert = false;&#10;LoginUser loginUser = SecurityUtils.getLoginUser();&#10;$EntityType$ currentEntity = input.getId() == null ? null : repository.selectById(input.getId());&#10;// 若不存在也被视为新建&#10;if (currentEntity == null) {&#10;    isInsert = true;&#10;    // 书写创建时生成的字段&#10;    currentEntity = new $EntityType$();&#10;    currentEntity.setCreateId(loginUser.getUser().getId());&#10;    currentEntity.setCreateDate(new Date(System.currentTimeMillis()));&#10;    //currentEntity.setOrgId(loginUser.getUser().getOrgId()); // MybatisPlusConfig 中有配置&#10;} else {&#10;    // DNT&#10;}&#10;currentEntity.setLastUpdateDate(new Date(System.currentTimeMillis()));&#10;currentEntity.setLastUpdateId(loginUser.getUser().getId());&#10;// 书写允许更新的字段(Ctrl+D+上可持续选择最新的字段)&#10;currentEntity.setField(input.getField());&#10;//  Cause: java.sql.SQLException: 无效的列类型: 1111 当使用updateById插入时&#10;int cnt = isInsert ? repository.insert(currentEntity) : repository.updateById(currentEntity);&#10;if (cnt != 1) {&#10;    throw new FriendlyException(&quot;保存失败&quot;);&#10;}&#10;// 已更新&#10;return currentEntity.getId();" description="保存逻辑(新增+更新)" toReformat="false" toShortenFQNames="true">
     <variable name="EntityType" expression="rightSideType()" defaultValue="&quot;EntityType&quot;" alwaysStopAt="true" />
     <context>
       <option name="JAVA_CODE" value="true" />
@@ -105,7 +105,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="OPTIONS" value="@RequestMapping(method = RequestMethod.OPTIONS)" description="OPTIONS注解(一般不会用上)" toReformat="false" toShortenFQNames="true">
+  <template name="options" value="@RequestMapping(method = RequestMethod.OPTIONS)" description="OPTIONS注解(一般不会用上)" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
@@ -117,13 +117,13 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="NowYear" value="new Integer(LocalDate.now().getYear()).toString()" description="当前年份" toReformat="false" toShortenFQNames="true">
+  <template name="nowYear" value="new Integer(LocalDate.now().getYear()).toString()" description="当前年份" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="PutStatus" value="@PutMapping(value = &quot;$api$&quot;)&#10;@ApiOperation(value = &quot;$apiName$[状态切换(审核/弃审/停用)]-OK&quot;)&#10;@ApiResponses({@ApiResponse(code = 200, message = &quot;OK&quot;, response = String.class)})&#10;@ApiImplicitParams({&#10;        @ApiImplicitParam(name = &quot;ids&quot;, value = &quot;$apiName$主键(多个逗号分割)&quot;, required = true),&#10;        @ApiImplicitParam(name = &quot;target_status&quot;, value = &quot;目标状态: 0未审核(制单) 1已审核 99停用&quot;, required = true)&#10;})&#10;public JsonData switch$Api$Status(@Validated @RequestParam(&quot;ids&quot;) Long[] ids,&#10;        @Validated @RequestParam(&quot;target_status&quot;) Long targetStatus) {&#10;    service.switch$Api$Status(ids, targetStatus);&#10;    return success();&#10;}" description="状态转换" toReformat="false" toShortenFQNames="true">
+  <template name="putStatus" value="@PutMapping(value = &quot;$api$&quot;)&#10;@ApiOperation(value = &quot;$apiName$[状态切换(审核/弃审/停用)]-OK&quot;)&#10;@ApiResponses({@ApiResponse(code = 200, message = &quot;OK&quot;, response = String.class)})&#10;@ApiImplicitParams({&#10;        @ApiImplicitParam(name = &quot;ids&quot;, value = &quot;$apiName$主键(多个逗号分割)&quot;, required = true),&#10;        @ApiImplicitParam(name = &quot;target_status&quot;, value = &quot;目标状态: 0未审核(制单) 1已审核 99停用&quot;, required = true)&#10;})&#10;public JsonData switch$Api$Status(@Validated @RequestParam(&quot;ids&quot;) Long[] ids,&#10;        @Validated @RequestParam(&quot;target_status&quot;) Long targetStatus) {&#10;    service.switch$Api$Status(ids, targetStatus);&#10;    return success();&#10;}" description="状态转换" toReformat="false" toShortenFQNames="true">
     <variable name="api" expression="" defaultValue="&quot;entity&quot;" alwaysStopAt="true" />
     <variable name="apiName" expression="" defaultValue="&quot;操作对象&quot;" alwaysStopAt="true" />
     <variable name="Api" expression="" defaultValue="&quot;Entity&quot;" alwaysStopAt="true" />
@@ -132,13 +132,13 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="API_S" value="@ApiImplicitParams({&#10;        @ApiImplicitParam(name = &quot;ids&quot;, value = &quot;供应商id集合,逗号分隔&quot;, required = true),&#10;        @ApiImplicitParam(name = &quot;target_status&quot;, value = &quot;目标状态&quot;, required = true)&#10;})" description="参数中多个API注解" toReformat="false" toShortenFQNames="true">
+  <template name="apis" value="@ApiImplicitParams({&#10;        @ApiImplicitParam(name = &quot;ids&quot;, value = &quot;供应商id集合,逗号分隔&quot;, required = true),&#10;        @ApiImplicitParam(name = &quot;target_status&quot;, value = &quot;目标状态&quot;, required = true)&#10;})" description="参数中多个API注解" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="EPS" value="// 精度问题: 是指当两个浮点的差异在EPS以内时, 就视为相等&#10;// 也就是说这里判断的是相等 而不是 &gt;=&#10;// ($sumAmountOfGoods$.subtract(new BigDecimal(0)).compareTo($ProjectConstants$.$PRICE_EPS$) &lt; 0)&#10;&#10;// truncation(应当截断入参后比较, 而不是四舍五入)&#10;// 最小金额问题(最小能保存的金额是0.01)&#10;// 使用精度0.01判断相等 然后判断大于(这里只需保证0.02&gt;0.01009通过就行) 不行&#10;// 直接与0.01进行比较 实际上0.01可能是0.01000000....99999或0.00999999&#10;// 否则保存0.01时 结果可能是不确定的&#10;&#10;// 仅当数值&gt;=Constants.MTL_MIN_PRICE时才允许保存&#10;// 入参截断后比较, 比较精度为Constants.BIT_CNT(2)位小数, 保存精度由数据库决定&#10;if (input.getCostPrice().setScale(Constants.BIT_CNT, BigDecimal.ROUND_DOWN)&#10;        // 与常量=new BigDecimal(0.01)进行比较&#10;        .compareTo(Constants.MTL_MIN_PRICE&#10;                .setScale(Constants.BIT_CNT, BigDecimal.ROUND_HALF_UP)&#10;        )&#10;        &lt; 0) {&#10;    throw new FriendlyException(&quot;金额设置过小&quot;);&#10;}" description="精度判定" toReformat="false" toShortenFQNames="true">
+  <template name="eps" value="// 精度问题: 是指当两个浮点的差异在EPS以内时, 就视为相等&#10;// 也就是说这里判断的是相等 而不是 &gt;=&#10;// ($sumAmountOfGoods$.subtract(new BigDecimal(0)).compareTo($ProjectConstants$.$PRICE_EPS$) &lt; 0)&#10;&#10;// truncation(应当截断入参后比较, 而不是四舍五入)&#10;// 最小金额问题(最小能保存的金额是0.01)&#10;// 使用精度0.01判断相等 然后判断大于(这里只需保证0.02&gt;0.01009通过就行) 不行&#10;// 直接与0.01进行比较 实际上0.01可能是0.01000000....99999或0.00999999&#10;// 否则保存0.01时 结果可能是不确定的&#10;&#10;// 仅当数值&gt;=Constants.MTL_MIN_PRICE时才允许保存&#10;// 入参截断后比较, 比较精度为Constants.BIT_CNT(2)位小数, 保存精度由数据库决定&#10;if (input.getCostPrice().setScale(Constants.BIT_CNT, BigDecimal.ROUND_DOWN)&#10;        // 与常量=new BigDecimal(0.01)进行比较&#10;        .compareTo(Constants.MTL_MIN_PRICE&#10;                .setScale(Constants.BIT_CNT, BigDecimal.ROUND_HALF_UP)&#10;        )&#10;        &lt; 0) {&#10;    throw new FriendlyException(&quot;金额设置过小&quot;);&#10;}" description="精度判定" toReformat="false" toShortenFQNames="true">
     <variable name="sumAmountOfGoods" expression="" defaultValue="&quot;amount&quot;" alwaysStopAt="false" />
     <variable name="ProjectConstants" expression="" defaultValue="&quot;Constants&quot;" alwaysStopAt="false" />
     <variable name="PRICE_EPS" expression="" defaultValue="&quot;EPS&quot;" alwaysStopAt="false" />
@@ -147,14 +147,29 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="WRAPPER" value="QueryWrapper wrapper = new QueryWrapper();&#10;if (!StringUtils.isEmpty(input.getDeptName())) {&#10;    wrapper.eq(&quot;dept_name&quot;, input.getDeptName());&#10;    if (repository.selectCount(wrapper) != 0) {&#10;        throw new FriendlyException(&quot;部门名称重复&quot;);&#10;    }&#10;    wrapper.or();&#10;}&#10;if (!StringUtils.isEmpty(input.getDeptCode())) {&#10;    wrapper.eq(&quot;dept_code&quot;, input.getDeptCode());&#10;    if (repository.selectCount(wrapper) != 0) {&#10;        throw new FriendlyException(&quot;部门编码重复&quot;);&#10;    }&#10;}&#10;// `SK: mybatis &quot;QueryWrapper&quot; 用法`&#10;// https://mp.baomidou.com/guide/wrapper.html#or&#10;// https://woodwhales.cn/2019/03/28/025/&#10;// `SK: BigDecimal.ROUND_HALF_UP`&#10;// http://longlonggo.com/post/387.html&#10;// https://isuperqiang.cn/post/java-bi-jiao-fu-dian-shu-de-zheng-que-fang-shi/&#10;// `SK: java BigDecimal 保留小数 -四舍五入 site:github.io`&#10;// http://www.fengbt.com/2019/05/24/Java8/BigDecimal%E4%BF%9D%E7%95%99%E4%B8%A4%E4%BD%8D%E5%B0%8F%E6%95%B0/&#10;// http://justyan.com/2016/02/19/java%E4%B8%AD%E4%BF%9D%E7%95%99%E4%B8%A4%E4%BD%8D%E5%B0%8F%E6%95%B0/&#10;&#10;/*Map&lt;String, Object&gt; cMap = new HashMap&lt;&gt;(1);&#10;        cMap.put(&quot;code&quot;, code);&#10;        List&lt;DicAccount&gt; entityList = repository.selectByMap(cMap);&#10;        if (entityList == null || entityList.isEmpty()) {&#10;            throw new FriendlyException(&quot;指定核算类别不存在&quot;);&#10;        }*/" description="MyBatis-Plus 条件构造器" toReformat="false" toShortenFQNames="true">
+  <template name="wrapper" value="QueryWrapper wrapper = new QueryWrapper();&#10;if (!StringUtils.isEmpty(input.getDeptName())) {&#10;    wrapper.eq(&quot;dept_name&quot;, input.getDeptName());&#10;    if (repository.selectCount(wrapper) != 0) {&#10;        throw new FriendlyException(&quot;部门名称重复&quot;);&#10;    }&#10;    wrapper.or();&#10;}&#10;if (!StringUtils.isEmpty(input.getDeptCode())) {&#10;    wrapper.eq(&quot;dept_code&quot;, input.getDeptCode());&#10;    if (repository.selectCount(wrapper) != 0) {&#10;        throw new FriendlyException(&quot;部门编码重复&quot;);&#10;    }&#10;}&#10;// `SK: mybatis &quot;QueryWrapper&quot; 用法`&#10;// https://mp.baomidou.com/guide/wrapper.html#or&#10;// https://woodwhales.cn/2019/03/28/025/&#10;// `SK: BigDecimal.ROUND_HALF_UP`&#10;// http://longlonggo.com/post/387.html&#10;// https://isuperqiang.cn/post/java-bi-jiao-fu-dian-shu-de-zheng-que-fang-shi/&#10;// `SK: java BigDecimal 保留小数 -四舍五入 site:github.io`&#10;// http://www.fengbt.com/2019/05/24/Java8/BigDecimal%E4%BF%9D%E7%95%99%E4%B8%A4%E4%BD%8D%E5%B0%8F%E6%95%B0/&#10;// http://justyan.com/2016/02/19/java%E4%B8%AD%E4%BF%9D%E7%95%99%E4%B8%A4%E4%BD%8D%E5%B0%8F%E6%95%B0/&#10;&#10;/*Map&lt;String, Object&gt; cMap = new HashMap&lt;&gt;(1);&#10;        cMap.put(&quot;code&quot;, code);&#10;        List&lt;DicAccount&gt; entityList = repository.selectByMap(cMap);&#10;        if (entityList == null || entityList.isEmpty()) {&#10;            throw new FriendlyException(&quot;指定核算类别不存在&quot;);&#10;        }*/" description="MyBatis-Plus 条件构造器" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="DIC" value="Map&lt;String, DictionaryDto&gt; dic = sysDictionaryManager&#10;        .dicList(&quot;$RuleType$&quot;, 0L, &quot;&quot;)&#10;        .stream()&#10;        .collect(Collectors.toMap(ele -&gt; ele.getDicCode(), ele -&gt; ele));" description="字典" toReformat="false" toShortenFQNames="true">
-    <variable name="RuleType" expression="" defaultValue="&quot;RULR_TYPE.XXX.getCode()&quot;" alwaysStopAt="true" />
+  <template name="dic" value="Map&lt;String, DictionaryDto&gt; dic = sysDictionaryManager&#10;        .dicList(&quot;$RuleType$&quot;, 0L, &quot;&quot;)&#10;        .stream()&#10;        .collect(Collectors.toMap(ele -&gt; ele.getDicCode(), ele -&gt; ele));" description="字典" toReformat="false" toShortenFQNames="true">
+    <variable name="RuleType" expression="" defaultValue="RuleType.XXX.getCode()" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="saveObey" value="if(input.get$ObeyCode$List() != null){&#10;    // 删除$ObeyName$&#10;    QueryWrapper wrapper = new QueryWrapper&lt;&gt;();&#10;    wrapper.eq(&quot;$MainCode$_id&quot;, savedId);&#10;    List&lt;$ObeyCode$&gt; current$ObeyCode$EntityList = mtlItem$ObeyCode$Repository.selectList(wrapper);&#10;    // 去重&#10;    Set&lt;Long&gt; del$ObeyCode$IdSet = current$ObeyCode$EntityList.stream().map(ele -&gt; ele.getId()).collect(Collectors.toSet());&#10;    Set&lt;Long&gt; input$ObeyCode$IdSet =input.get$ObeyCode$List().stream().map(ele -&gt; ele.getId()).collect(Collectors.toSet());&#10;    // 移除所有存在于传入$ObeyName$的ID列表中的ID&#10;    del$ObeyCode$IdSet.removeAll(input$ObeyCode$IdSet);&#10;    $ObeyCode$Manager.batchErase(del$ObeyCode$IdSet);&#10;&#10;    // 保存$ObeyName$&#10;    input.get$ObeyCode$List().forEach(ele -&gt; {&#10;        ele.set$MainCode$Id(savedId);&#10;        $ObeyCode$Manager.save(ele);&#10;    });&#10;}" description="从表保存逻辑(新增+更新+删除)" toReformat="false" toShortenFQNames="true">
+    <variable name="ObeyCode" expression="" defaultValue="&quot;Obey&quot;" alwaysStopAt="true" />
+    <variable name="MainCode" expression="" defaultValue="&quot;Main&quot;" alwaysStopAt="true" />
+    <variable name="ObeyName" expression="" defaultValue="&quot;从表&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="batchErase" value="public void batchErase(Collection&lt;Long&gt; idCollect) {&#10;    if (idCollect.size() &lt;= 0) {&#10;        return;&#10;    }&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.in(&quot;id&quot;, idCollect);&#10;    repository.delete(wrapper);&#10;}" description="批量删除" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
