@@ -205,4 +205,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="authenticate" value="@Resource&#10;private AuthenticationManager authenticationManager;&#10;&#10;Authentication _authentication;&#10;&#10;private Long id_buffer;&#10;&#10;@Before&#10;public void before() throws Exception {&#10;    LoginInput input = new LoginInput();&#10;    input.setPassword(&quot;123&quot;);&#10;    input.setUsername(&quot;admin&quot;);&#10;    //LoginOutput loginOutput = employeeService.login(input);&#10;    _authentication = authenticationManager&#10;            .authenticate(new UsernamePasswordAuthenticationToken(input.getUsername(), input.getUsername() + input.getPassword()));&#10;    SecurityContextHolder.setContext(new org.springframework.security.core.context.SecurityContext() {&#10;        @Override&#10;        public Authentication getAuthentication() {&#10;            return _authentication;&#10;        }&#10;&#10;        @Override&#10;        public void setAuthentication(Authentication authentication) {&#10;            _authentication = authentication;&#10;        }&#10;    });&#10;    testSave();&#10;}&#10;&#10;@After&#10;public void after() throws Exception {&#10;    if (id_buffer != null &amp;&amp; id_buffer != 0) testerService.erase(id_buffer);&#10;}" description="Junit4用户验证" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
