@@ -217,4 +217,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="cmd" value="// https://www.cnblogs.com/polly333/p/7832540.html&#10;Runtime.getRuntime().exec(&quot;calc&quot;);" description="执行命令" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
