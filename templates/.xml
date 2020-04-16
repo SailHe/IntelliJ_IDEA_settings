@@ -27,7 +27,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="nowTime" value="System.currentTimeMillis()" description="当前时间的Long值" toReformat="false" toShortenFQNames="true">
+  <template name="nowTime" value="// new Date(&#10;System.currentTimeMillis()&#10;// LocalDateTime.now();" description="当前时间的Long值" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
     </context>
@@ -223,7 +223,15 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="findEnum" value="try {&#10;    EnumItemSpecForbid res = Arrays.stream(EnumItemSpecForbid.values())&#10;            .filter(predicate).findFirst().get();&#10;    return res;&#10;} catch (NoSuchElementException e) {&#10;    throw new FriendlyException(&quot;指定&quot; + ENUM_NAME + &quot;不存在&quot;);&#10;}" description="寻找一个枚举" toReformat="false" toShortenFQNames="true">
+  <template name="findEnum" value="try {&#10;    $EnumType$ res = Arrays.stream($EnumType$.values())&#10;            .filter(predicate).findFirst().get();&#10;    return res;&#10;} catch (NoSuchElementException e) {&#10;    throw new FriendlyException(&quot;指定&quot; + ENUM_NAME + &quot;不存在&quot;);&#10;}" description="寻找一个枚举" toReformat="false" toShortenFQNames="true">
+    <variable name="EnumType" expression="methodReturnType()" defaultValue="&quot;EnumType&quot;" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="predicate" value="Predicate&lt;? super $SuperType$&gt; predicate" description="谓词" toReformat="false" toShortenFQNames="true">
+    <variable name="SuperType" expression="methodReturnType()" defaultValue="&quot;SuperType&quot;" alwaysStopAt="false" />
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
