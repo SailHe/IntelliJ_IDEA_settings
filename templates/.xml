@@ -97,7 +97,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="toDto" value="$DtoType$ dto = new $DtoType$();&#10;// 拷贝Origin中所有与DTO匹配的字段到dto中&#10;org.springframework.beans.BeanUtils.copyProperties($inputOrEntity$, dto);" description="input / bean -&gt; dto" toReformat="false" toShortenFQNames="true">
+  <template name="toDto" value="$DtoType$ dto = new $DtoType$();&#10;// 拷贝Origin中所有与DTO匹配的字段到dto中&#10;org.springframework.beans.BeanUtils.copyProperties($inputOrEntity$, dto);" description="input / bean -&gt; dto （其实反过来一样的。。。）" toReformat="false" toShortenFQNames="true">
     <variable name="DtoType" expression="methodReturnType()" defaultValue="&quot;Target&quot;" alwaysStopAt="false" />
     <variable name="inputOrEntity" expression="" defaultValue="&quot;Origin&quot;" alwaysStopAt="true" />
     <context>
