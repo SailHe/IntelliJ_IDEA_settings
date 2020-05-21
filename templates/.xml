@@ -27,7 +27,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="nowTime" value="System.currentTimeMillis()" description="当前时间的Long值" toReformat="false" toShortenFQNames="true">
+  <template name="nowTime" value="// new Date(&#10;System.currentTimeMillis()&#10;// LocalDateTime.now();" description="当前时间的Long值" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
     </context>
@@ -97,7 +97,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="toDto" value="$DtoType$ dto = new $DtoType$();&#10;// 拷贝Origin中所有与DTO匹配的字段到dto中&#10;org.springframework.beans.BeanUtils.copyProperties($inputOrEntity$, dto);" description="input / bean -&gt; dto" toReformat="false" toShortenFQNames="true">
+  <template name="toDto" value="$DtoType$ dto = new $DtoType$();&#10;// 拷贝Origin中所有与DTO匹配的字段到dto中&#10;org.springframework.beans.BeanUtils.copyProperties($inputOrEntity$, dto);" description="input / bean -&gt; dto （其实反过来一样的。。。）" toReformat="false" toShortenFQNames="true">
     <variable name="DtoType" expression="methodReturnType()" defaultValue="&quot;Target&quot;" alwaysStopAt="false" />
     <variable name="inputOrEntity" expression="" defaultValue="&quot;Origin&quot;" alwaysStopAt="true" />
     <context>
@@ -160,7 +160,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="saveObey" value="if(input.get$ObeyCode$List() != null){&#10;    // 删除$ObeyName$&#10;    QueryWrapper wrapper = new QueryWrapper&lt;&gt;();&#10;    wrapper.eq(&quot;$MainCode$_id&quot;, savedId);&#10;    List&lt;$ObeyCode$&gt; current$ObeyCode$EntityList = mtlItem$ObeyCode$Repository.selectList(wrapper);&#10;    // 去重&#10;    Set&lt;Long&gt; del$ObeyCode$IdSet = current$ObeyCode$EntityList.stream().map(ele -&gt; ele.getId()).collect(Collectors.toSet());&#10;    Set&lt;Long&gt; input$ObeyCode$IdSet =input.get$ObeyCode$List().stream().map(ele -&gt; ele.getId()).collect(Collectors.toSet());&#10;    // 移除所有存在于传入$ObeyName$的ID列表中的ID&#10;    del$ObeyCode$IdSet.removeAll(input$ObeyCode$IdSet);&#10;    $ObeyCode$Manager.batchErase(del$ObeyCode$IdSet);&#10;&#10;    // 保存$ObeyName$&#10;    input.get$ObeyCode$List().forEach(ele -&gt; {&#10;        ele.set$MainCode$Id(savedId);&#10;        $ObeyCode$Manager.save(ele);&#10;    });&#10;}" description="从表保存逻辑(新增+更新+删除)" toReformat="false" toShortenFQNames="true">
+  <template name="obeySave" value="if(input.get$ObeyCode$List() != null){&#10;    // 删除$ObeyName$&#10;    QueryWrapper wrapper = new QueryWrapper&lt;&gt;();&#10;    wrapper.eq(&quot;$MainCode$_id&quot;, savedId);&#10;    List&lt;$ObeyCode$&gt; current$ObeyCode$EntityList = mtlItem$ObeyCode$Repository.selectList(wrapper);&#10;    // 去重&#10;    Set&lt;Long&gt; del$ObeyCode$IdSet = current$ObeyCode$EntityList.stream().map(ele -&gt; ele.getId()).collect(Collectors.toSet());&#10;    Set&lt;Long&gt; input$ObeyCode$IdSet =input.get$ObeyCode$List().stream().map(ele -&gt; ele.getId()).collect(Collectors.toSet());&#10;    // 移除所有存在于传入$ObeyName$的ID列表中的ID&#10;    del$ObeyCode$IdSet.removeAll(input$ObeyCode$IdSet);&#10;    $ObeyCode$Manager.batchErase(del$ObeyCode$IdSet);&#10;&#10;    // 保存$ObeyName$&#10;    input.get$ObeyCode$List().forEach(ele -&gt; {&#10;        ele.set$MainCode$Id(savedId);&#10;        $ObeyCode$Manager.save(ele);&#10;    });&#10;}" description="从表保存逻辑(新增+更新+删除)" toReformat="false" toShortenFQNames="true">
     <variable name="ObeyCode" expression="" defaultValue="&quot;Obey&quot;" alwaysStopAt="true" />
     <variable name="MainCode" expression="" defaultValue="&quot;Main&quot;" alwaysStopAt="true" />
     <variable name="ObeyName" expression="" defaultValue="&quot;从表&quot;" alwaysStopAt="true" />
@@ -169,7 +169,69 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="batchErase" value="public void batchErase(Collection&lt;Long&gt; idCollect) {&#10;    if (idCollect.size() &lt;= 0) {&#10;        return;&#10;    }&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.in(&quot;id&quot;, idCollect);&#10;    repository.delete(wrapper);&#10;}" description="批量删除" toReformat="false" toShortenFQNames="true">
+  <template name="batchOp" value="public void batch$OpName$(Collection&lt;Long&gt; idCollect) {&#10;    if (idCollect.isEmpty()) {&#10;        return;&#10;    }&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.in(&quot;id&quot;, idCollect);&#10;    repository.$SigleOp$(wrapper);&#10;}" description="批量操作（通常是删除）" toReformat="false" toShortenFQNames="true">
+    <variable name="OpName" expression="" defaultValue="&quot;Erase&quot;" alwaysStopAt="true" />
+    <variable name="SigleOp" expression="" defaultValue="&quot;delete&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="obeyErase" value="public void obeyErase(Long mainId) {&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.eq($MAIN_ID$, mainId);&#10;    repository.delete(wrapper);&#10;}" description="从表删除逻辑" toReformat="false" toShortenFQNames="true">
+    <variable name="MAIN_ID" expression="" defaultValue="&quot;MAIN_ID&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="obeyErase_batch" value="public void obeyErase(Collection&lt;Long&gt; mainIdCollect) {&#10;    QueryWrapper wrapper = new QueryWrapper();&#10;    wrapper.in(&quot;$MAIN_ID$&quot;, mainIdCollect);&#10;    repository.delete(wrapper);&#10;}" description="从表删除逻辑(批量版)" toReformat="false" toShortenFQNames="true">
+    <variable name="MAIN_ID" expression="" defaultValue="&quot;MAIN_ID&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="path" value="@DeleteMapping(value = &quot;/{ids}&quot;)&#10;@ApiOperation(value = &quot;批量物资档案删除-OK&quot;)&#10;@ApiImplicitParam(name = &quot;ids&quot;, value = &quot;物资档案id集合,逗号分隔&quot;, required = true)&#10;public JsonData delete(@PathVariable Long[] ids) {&#10;    service.batchErase(ids);&#10;    return success();&#10;}" description="批量操作（通常是删除） Path 版 通过/ids=xxx调用" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="listToArr" value="(List&lt;$ElementType$&gt; originList) -&gt; {&#10;    Long[] arr = new Long[originList.size()];&#10;    originList.toArray(arr);&#10;    return arr;&#10;}($originList$)" description="列表转数组" toReformat="false" toShortenFQNames="true">
+    <variable name="ElementType" expression="" defaultValue="Long" alwaysStopAt="true" />
+    <variable name="originList" expression="" defaultValue="OriginList" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="authenticate" value="@Resource&#10;private AuthenticationManager authenticationManager;&#10;&#10;Authentication _authentication;&#10;&#10;private Long id_buffer;&#10;&#10;@Before&#10;public void before() throws Exception {&#10;    LoginInput input = new LoginInput();&#10;    input.setPassword(&quot;123&quot;);&#10;    input.setUsername(&quot;admin&quot;);&#10;    //LoginOutput loginOutput = employeeService.login(input);&#10;    _authentication = authenticationManager&#10;            .authenticate(new UsernamePasswordAuthenticationToken(input.getUsername(), input.getUsername() + input.getPassword()));&#10;    SecurityContextHolder.setContext(new org.springframework.security.core.context.SecurityContext() {&#10;        @Override&#10;        public Authentication getAuthentication() {&#10;            return _authentication;&#10;        }&#10;&#10;        @Override&#10;        public void setAuthentication(Authentication authentication) {&#10;            _authentication = authentication;&#10;        }&#10;    });&#10;    testSave();&#10;}&#10;&#10;@After&#10;public void after() throws Exception {&#10;    if (id_buffer != null &amp;&amp; id_buffer != 0) testerService.erase(id_buffer);&#10;}" description="Junit4用户验证" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="orgId" value="SecurityUtils.getLoginUser().getUser().getOrgId()" description="机构主键" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="cmd" value="// https://www.cnblogs.com/polly333/p/7832540.html&#10;Runtime.getRuntime().exec(&quot;calc&quot;);" description="执行命令" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="findEnum" value="try {&#10;    $EnumType$ res = Arrays.stream($EnumType$.values())&#10;            .filter(predicate).findFirst().get();&#10;    return res;&#10;} catch (NoSuchElementException e) {&#10;    throw new FriendlyException(&quot;指定&quot; + ENUM_NAME + &quot;不存在&quot;);&#10;}" description="寻找一个枚举" toReformat="false" toShortenFQNames="true">
+    <variable name="EnumType" expression="methodReturnType()" defaultValue="&quot;EnumType&quot;" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="predicate" value="Predicate&lt;? super $SuperType$&gt; predicate" description="谓词" toReformat="false" toShortenFQNames="true">
+    <variable name="SuperType" expression="methodReturnType()" defaultValue="&quot;SuperType&quot;" alwaysStopAt="false" />
     <context>
       <option name="JAVA_CODE" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
